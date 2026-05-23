@@ -38,7 +38,7 @@ public class InterfaceUsuario {
         return prazoEmAnos;
     }
 
-    /** Solicita a taxa de juros anual, verifica se é válida e então retorna o valor, caso não seja entra em loop até o valor inserido ser válido*/
+    /** Solicita a taxa de juros anual, verifica se ela  é válida e então retorna o valor, caso não seja entra em loop até o valor inserido ser válido*/
     public double pedirTaxaJurosAnual(){
         boolean taxaJurosAnualValida = false;
         double taxaDeJurosAnual;
