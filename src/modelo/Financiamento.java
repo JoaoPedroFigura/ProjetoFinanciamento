@@ -14,6 +14,8 @@ public class Financiamento {
         this.taxaJurosAnual = taxaJurosAnual;
     }
 
+    //Métodos:
+
 
     public double getValorImovel() {
         return this.valorImovel;
@@ -41,4 +43,13 @@ public class Financiamento {
         System.out.println("VALOR DO IMOVEL: " + getValorImovel());
     }
 
+    @Override
+    public String toString() {
+        return "=========================\n"
+                +"Financiamento: \n"
+                + "Valor do Imóvel: R$" + getValorImovel() + "\n"
+                + "Valor da parcela do Financiamento: R$" + String.format("%.2f", calcularPagamentoMensal()) + "\n"
+                + "Valor total do Financiamento: R$" + String.format("%.2f", calcularTotalPagamento()) + "\n"
+                + "======================\n";
+    }
 }
