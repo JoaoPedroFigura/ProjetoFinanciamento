@@ -1,17 +1,18 @@
 package modelo;
 
-public class Financiamento {
+public abstract class Financiamento {
 
-    private double valorImovel;
-    private int prazoFinanciamentoAnos;
-    private double taxaJurosAnual;
+    protected double valorImovel;
+    protected int prazoFinanciamentoAnos;
+    protected double taxaJurosAnual;
 
 
 
-    /* Construtor da classe */ public Financiamento(double valorImovel, int prazoFinanciamento, double taxaJurosAnual) {
+    // Construtor da classe
+    public Financiamento(double valorImovel, int prazoFinanciamentoAnos, double taxaJurosAnual) {
         this.valorImovel = valorImovel;
-        this.prazoFinanciamentoAnos = prazoFinanciamento;
-        this.taxaJurosAnual = taxaJurosAnual;
+        this.prazoFinanciamentoAnos = prazoFinanciamentoAnos;
+        this.taxaJurosAnual = taxaJurosAnual /100.0;
     }
 
     //Métodos:
@@ -30,26 +31,21 @@ public class Financiamento {
     }
 
     public double calcularPagamentoMensal(){
-        return (this.valorImovel / (this.prazoFinanciamentoAnos * 12)) * (1+ (this.taxaJurosAnual /12));
+        return (this.valorImovel / (this.prazoFinanciamentoAnos * 12)) * (1+ (this.taxaJurosAnual / 12));
     }
 
-    public double calcularTotalPagamento(){
-        return calcularPagamentoMensal() * prazoFinanciamentoAnos *12;
-    }
+    public abstract double calcularTotalPagamento();
 
     public void exibirDadosFinanciamento(){
-        System.out.println("INFORMAÇÕES SOBRE O FINANCIAMENTO: ");
-        System.out.println("VALOR TOTAL: " + calcularTotalPagamento());
+
+        System.out.println("=========================");
+        System.out.println("INFORMAÇÕES BÁSICAS SOBRE O FINANCIAMENTO: ");
+        System.out.println("TIPO DO FINANCIAMENTO: " + getClass().getSimpleName());
         System.out.println("VALOR DO IMOVEL: " + getValorImovel());
+        System.out.println("PRAZO DO FINANCIAMENTO EM ANOS: " + getPrazoFinanciamentoAnos());
+        System.out.println("A TAXA DE JUROS ANUAL É DE: " + getTaxaJurosAnual() + "%" );
+        System.out.println("O PAGAMENTO MENSAL DO FINCANCIAMENTO SERA DE: R$" + calcularPagamentoMensal());
+        System.out.println("O PAGAMENTO TOTAL DO FINANCIAMENTO SERA DE: R$" + String.format("%.2f", calcularTotalPagamento()));
     }
 
-    @Override
-    public String toString() {
-        return "=========================\n"
-                +"Financiamento: \n"
-                + "Valor do Imóvel: R$" + getValorImovel() + "\n"
-                + "Valor da parcela do Financiamento: R$" + String.format("%.2f", calcularPagamentoMensal()) + "\n"
-                + "Valor total do Financiamento: R$" + String.format("%.2f", calcularTotalPagamento()) + "\n"
-                + "======================\n";
-    }
 }
